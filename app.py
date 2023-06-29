@@ -16,14 +16,13 @@ st.title("Use Pygwalker In Streamlit")
 uploaded_file = st.file_uploader("Choose a CSV file")
 if uploaded_file is not None:
     # Can be used wherever a "file-like" object is accepted:
-    dataframe = pd.read_csv(uploaded_file)
-    st.write(dataframe)
+    df = pd.read_csv(uploaded_file)
 
-# Import your data
-df = pd.read_csv("https://kanaries-app.s3.ap-northeast-1.amazonaws.com/public-datasets/bike_sharing_dc.csv")
+    # Import your data
+    df = pd.read_csv("https://kanaries-app.s3.ap-northeast-1.amazonaws.com/public-datasets/bike_sharing_dc.csv")
 
-# Generate the HTML using Pygwalker
-pyg_html = pyg.walk(df, return_html=True)
+    # Generate the HTML using Pygwalker
+    pyg_html = pyg.walk(df, return_html=True)
 
-# Embed the HTML into the Streamlit app
-components.html(pyg_html, height=1000, scrolling=True)
+    # Embed the HTML into the Streamlit app
+    components.html(pyg_html, height=1000, scrolling=True)
