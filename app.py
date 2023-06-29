@@ -18,9 +18,6 @@ if uploaded_file is not None:
     # Can be used wherever a "file-like" object is accepted:
     df = pd.read_csv(uploaded_file)
 
-    # Import your data
-    df = pd.read_csv("https://kanaries-app.s3.ap-northeast-1.amazonaws.com/public-datasets/bike_sharing_dc.csv")
-
     # Generate the HTML using Pygwalker
     pyg_html = pyg.walk(df, return_html=True)
 
