@@ -21,9 +21,9 @@ for uploaded_file in uploaded_files:
 
 # Import your data
 # Can be used wherever a "file-like" object is accepted:
-if uploaded_file is not None:
+try:
     df = pd.read_csv(uploaded_file)
-else:
+except:
     df = pd.read_csv(
         "https://kanaries-app.s3.ap-northeast-1.amazonaws.com/public-datasets/bike_sharing_dc.csv"
     )
