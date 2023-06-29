@@ -21,10 +21,8 @@ for uploaded_file in uploaded_files:
 
 # Import your data
 # Can be used wherever a "file-like" object is accepted:
-df = pd.read_csv(
-    "https://kanaries-app.s3.ap-northeast-1.amazonaws.com/public-datasets/bike_sharing_dc.csv"
-)
-
+df = pd.DataFrame()
+pd['a'] = [1, 2, 3]
 
 # Generate the HTML using Pygwalker
 pyg_html = pyg.walk(df, return_html=True)
