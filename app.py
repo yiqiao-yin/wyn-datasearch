@@ -18,15 +18,13 @@ for uploaded_file in uploaded_files:
     st.write("filename:", uploaded_file.name)
     st.write(bytes_data)
 
+    # Import your data
+    df = pd.DataFrame(uploaded_file)
+    pd['a'] = [1, 2, 3]
 
-# Import your data
-# Can be used wherever a "file-like" object is accepted:
-df = pd.DataFrame()
-pd['a'] = [1, 2, 3]
-
-# Generate the HTML using Pygwalker
-pyg_html = pyg.walk(df, return_html=True)
+    # Generate the HTML using Pygwalker
+    pyg_html = pyg.walk(df, return_html=True)
 
 
-# Embed the HTML into the Streamlit app
-components.html(pyg_html, height=1000, scrolling=True)
+    # Embed the HTML into the Streamlit app
+    components.html(pyg_html, height=1000, scrolling=True)
