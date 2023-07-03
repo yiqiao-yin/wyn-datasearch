@@ -57,20 +57,5 @@ if uploaded_file is not None:
 
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
-
-    # Clear
-    counter_placeholder = st.sidebar.empty()
-    clear_button = st.button("Clear Conversation", key="clear")
-
-    # reset everything
-    if clear_button:
-        st.session_state["generated"] = []
-        st.session_state["past"] = []
-        st.session_state["messages"] = [
-            {"role": "system", "content": "You are a helpful assistant."}
-        ]
-        st.session_state["number_tokens"] = []
-        st.session_state["domain_name"] = []
-        counter_placeholder.write(f"Next item ...")
 else:
     st.warning("Please upload a csv file.")
