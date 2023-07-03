@@ -1,16 +1,35 @@
 import openai
 import pandas as pd
-from pandasai import PandasAI
-from pandasai.llm.openai import OpenAI
 import pygwalker as pyg
 import streamlit as st
 import streamlit.components.v1 as components
+from pandasai import PandasAI
+from pandasai.llm.openai import OpenAI
+from streamlit_chat import message
 
 # Adjust the width of the Streamlit page
 st.set_page_config(page_title="W.Y.N. Data Viz ⭐", layout="wide")
 
 # Add Title
 st.title("W.Y.N. Data Viz ⭐")
+
+# Sidebar
+clear_button = st.sidebar.button("Clear Conversation", key="clear")
+counter_placeholder = st.sidebar.empty()
+st.sidebar.markdown(
+    "@ [Yiqiao Yin](https://www.y-yin.io/) | [LinkedIn](https://www.linkedin.com/in/yiqiaoyin/) | [YouTube](https://youtube.com/YiqiaoYin/)"
+)
+
+# Reset everything
+if clear_button:
+    st.session_state["generated"] = []
+    st.session_state["past"] = []
+    st.session_state["messages"] = [
+        {"role": "system", "content": "You are a helpful assistant."}
+    ]
+    st.session_state["number_tokens"] = []
+    st.session_state["domain_name"] = []
+    counter_placeholder.write(f"Next item ...")
 
 # Insert a file uploader that accepts multiple files at a time
 uploaded_file = st.file_uploader("Choose a CSV file")
@@ -32,32 +51,30 @@ if uploaded_file is not None:
     llm = OpenAI(api_token=OPENAI_API_KEY)
     pandas_ai = PandasAI(llm)
 
-    # Initialize chat history
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+    # Container for chat history
+    response_container = st.container()
+    container = st.container()
+    with container:
+        with st.form(key="my_form", clear_on_submit=True):
+            user_input = st.text_area(
+                "Enter your question here:", key="input", height=100
+            )
+            submit_button = st.form_submit_button(label="Send")
 
-    # React to user input
-    prompt = st.chat_input("Enter key words here.")
-    if prompt != "Enter key words here.":
-        # Display user message in chat message container
-        st.chat_message("user").markdown(prompt)
+        if submit_button:
+            output = pandas_ai(df, prompt=user_input)
 
-        # Add user message to chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
+        # update session
+        st.session_state["past"].append(user_input)
+        st.session_state["generated"].append({"type": "normal", "data": f"{output}"})
 
-        # Display chat messages from history on app rerun
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+    if st.session_state["generated"]:
+        with response_container:
+            for i in range(len(st.session_state["generated"])):
+                message(st.session_state["past"][i], is_user=True, key=str(i) + "_user")
+                answer = st.session_state["generated"][i]["data"]
+                message(answer)
+                counter_placeholder.write(f"All rights reserved @ Yiqiao Yin")
 
-    # Get answer
-    response = pandas_ai(df, prompt=prompt)
-
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        st.markdown(response)
-
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
 else:
     st.warning("Please upload a csv file.")

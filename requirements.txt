@@ -1,4 +1,5 @@
 openai==0.27.7
 pandasai==0.6.7
 streamlit>=1.24.0
+streamlit-chat==0.0.2.2
 pygwalker==0.1.11
