@@ -49,8 +49,6 @@ if uploaded_file is not None:
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
-    else:
-        st.warning("Please enter a question regarding the spreadsheet.")
 
     # Get answer
     response = pandas_ai(df, prompt=prompt)
