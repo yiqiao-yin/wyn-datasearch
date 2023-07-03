@@ -37,16 +37,20 @@ if uploaded_file is not None:
         st.session_state.messages = []
 
     # React to user input
-    if prompt := st.chat_input("Enter key words here."):
+    prompt = st.chat_input("Enter key words here.")
+    if prompt != "Enter key words here.":
         # Display user message in chat message container
         st.chat_message("user").markdown(prompt)
 
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
+
         # Display chat messages from history on app rerun
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
+    else:
+        st.warning("Please enter a question regarding the spreadsheet.")
 
     # Get answer
     response = pandas_ai(df, prompt=prompt)
