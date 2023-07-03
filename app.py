@@ -63,10 +63,8 @@ if uploaded_file is not None:
 
         if submit_button:
             output = pandas_ai(df, prompt=user_input)
-
-        # update session
-        st.session_state["past"].append(user_input)
-        st.session_state["generated"].append({"type": "normal", "data": f"{output}"})
+            st.session_state["past"].append(user_input)
+            st.session_state["generated"].append({"type": "normal", "data": f"{output}"})
 
     if st.session_state["generated"]:
         with response_container:
