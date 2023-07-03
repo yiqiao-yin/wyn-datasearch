@@ -1,4 +1,7 @@
+import openai
 import pandas as pd
+from pandasai import PandasAI
+from pandasai.llm.openai import OpenAI
 import pygwalker as pyg
 import streamlit as st
 import streamlit.components.v1 as components
@@ -23,5 +26,36 @@ if uploaded_file is not None:
 
     # Embed the HTML into the Streamlit app
     components.html(pyg_html, height=1000, scrolling=True)
+
+    # Instantiate a LLM
+    OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+    llm = OpenAI(api_token=OPENAI_API_KEY)
+    pandas_ai = PandasAI(llm)
+
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # React to user input
+    if prompt := st.chat_input("Enter key words here."):
+        # Display user message in chat message container
+        st.chat_message("user").markdown(prompt)
+
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        # Display chat messages from history on app rerun
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+    # Get answer
+    response = pandas_ai(df, prompt=prompt)
+
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(response)
+
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
 else:
     st.warning("Please upload a csv file.")
