@@ -21,8 +21,8 @@ st.sidebar.markdown(
 )
 
 # Reset everything
-if 'key' not in st.session_state:
-    st.session_state['key'] = 'value'
+st.session_state['key'] = 'value'
+    
 if clear_button:
     st.session_state["generated"] = []
     st.session_state["past"] = []
