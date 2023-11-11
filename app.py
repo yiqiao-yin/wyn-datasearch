@@ -20,6 +20,36 @@ st.sidebar.markdown(
     "@ [Yiqiao Yin](https://www.y-yin.io/) | [LinkedIn](https://www.linkedin.com/in/yiqiaoyin/) | [YouTube](https://youtube.com/YiqiaoYin/)"
 )
 
+# Sidebar - Instruction Manual
+with st.sidebar:
+    with st.expander("Instruction Manual 📖"):
+        st.markdown(
+            """
+            # 🌟 Pyg.Walk Chatbot on Streamlit 🌟
+
+            This Streamlit application serves as a user-friendly interface, similar to Excel or PowerBI dashboards, designed to expedite the navigation and visualization of datasets. Powered by the `pyg.walk` package, it provides a seamless experience, allowing users to traverse their data with speed and efficiency 🚀. The layout is intuitive, presenting data in an organized manner that's easy to analyze at a glance 📊.
+
+            ## 💬 Chatbot Interface
+
+            Behind the scenes, a chatbot interface is integrated into the application, enabling users to interact with their data conversationally 🤖. You can ask the chatbot simple questions regarding your dataset, such as:
+
+            - "What are the column names?" 📝
+            - "What is the average of [specific column]?" 📈
+
+            These questions are processed by the chatbot to provide quick, straightforward answers, making data analysis more accessible 🙌.
+
+            ## ⚠️ Limitations
+
+            Please note that the chatbot is designed for basic inquiries only 🛑. It is not equipped to handle complex data analysis or sophisticated queries. To maintain accuracy and avoid potential errors, keep your questions simple. This interface is a prototype aimed at demonstrating the capabilities of `pyg.walk` and should not be used for in-depth analysis 🧐.
+
+            ## 🚀 Getting Started
+
+            To begin, simply drag and drop your dataset in `.csv` format into the designated area of the application 📁➡️📊. Once your file is uploaded, you can start asking your data-related questions in plain English ✍️. The chatbot will respond with the requested information or appropriate guidance on how to phrase your questions for optimal results 💡.
+
+            """
+        )
+
+
 # Initialization
 # Session State also supports the attribute based syntax
 if 'generated' not in st.session_state:
