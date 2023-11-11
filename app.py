@@ -21,14 +21,13 @@ st.sidebar.markdown(
 )
 
 # Initialization
-# Check if 'key' already exists in session_state
-# If not, then initialize it
-if 'key' not in st.session_state:
-    st.session_state['key'] = 'value'
-
 # Session State also supports the attribute based syntax
 if 'generated' not in st.session_state:
     st.session_state.generated= 'value'
+
+# Session State also supports the attribute based syntax
+if 'past' not in st.session_state:
+    st.session_state.past = 'value'
 
 # Reset everything    
 if clear_button:
