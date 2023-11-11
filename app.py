@@ -23,11 +23,11 @@ st.sidebar.markdown(
 # Initialization
 # Session State also supports the attribute based syntax
 if 'generated' not in st.session_state:
-    st.session_state.generated= 'value'
+    st.session_state.generated = []
 
 # Session State also supports the attribute based syntax
 if 'past' not in st.session_state:
-    st.session_state.past = 'value'
+    st.session_state.past = []
 
 # Reset everything    
 if clear_button:
