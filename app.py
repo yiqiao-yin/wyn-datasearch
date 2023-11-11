@@ -20,9 +20,17 @@ st.sidebar.markdown(
     "@ [Yiqiao Yin](https://www.y-yin.io/) | [LinkedIn](https://www.linkedin.com/in/yiqiaoyin/) | [YouTube](https://youtube.com/YiqiaoYin/)"
 )
 
-# Reset everything
-st.session_state['key'] = 'value'
-    
+# Initialization
+# Check if 'key' already exists in session_state
+# If not, then initialize it
+if 'key' not in st.session_state:
+    st.session_state['key'] = 'value'
+
+# Session State also supports the attribute based syntax
+if 'generated' not in st.session_state:
+    st.session_state.generated= 'value'
+
+# Reset everything    
 if clear_button:
     st.session_state["generated"] = []
     st.session_state["past"] = []
