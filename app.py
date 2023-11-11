@@ -14,12 +14,6 @@ st.set_page_config(page_title="W.Y.N. Data Viz ⭐", layout="wide")
 st.title("W.Y.N. Data Viz ⭐")
 
 # Sidebar
-clear_button = st.sidebar.button("Clear Conversation", key="clear")
-counter_placeholder = st.sidebar.empty()
-st.sidebar.markdown(
-    "@ [Yiqiao Yin](https://www.y-yin.io/) | [LinkedIn](https://www.linkedin.com/in/yiqiaoyin/) | [YouTube](https://youtube.com/YiqiaoYin/)"
-)
-
 # Sidebar - Instruction Manual
 with st.sidebar:
     with st.expander("Instruction Manual 📖"):
@@ -48,6 +42,12 @@ with st.sidebar:
 
             """
         )
+clear_button = st.sidebar.button("Clear Conversation", key="clear")
+counter_placeholder = st.sidebar.empty()
+st.sidebar.markdown(
+    "@ [Yiqiao Yin](https://www.y-yin.io/) | [LinkedIn](https://www.linkedin.com/in/yiqiaoyin/) | [YouTube](https://youtube.com/YiqiaoYin/)"
+)
+
 
 
 # Initialization
